@@ -18,6 +18,8 @@ export default function ClientRoot({
         setCollapsed={setIsSidebarCollapsed}
       />
       <main
+        id="main-content"
+        role="main"
         className={clsx(
           "flex-1 overflow-auto transition-all duration-300",
           isSidebarCollapsed ? "md:ml-16" : "md:ml-64"

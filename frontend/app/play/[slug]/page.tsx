@@ -198,12 +198,13 @@ export default function PlayOnlinePage() {
   );
 
   return (
-    <div className="min-h-screen p-4 md:p-8">
+    <div className="min-h-screen p-4 md:p-8" role="region" aria-label="Online Chess Game">
       <div className="max-w-7xl mx-auto">
         {/* Top bar */}
         <div className="flex items-center justify-between mb-4">
           <button
             onClick={() => router.push("/")}
+            aria-label="Back to lobby"
             className="text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-2"
           >
             <svg
@@ -227,9 +228,9 @@ export default function PlayOnlinePage() {
 
         <div className="flex flex-col lg:flex-row gap-6 items-start justify-center">
           {/* Chessboard Section */}
-          <div className="w-full max-w-[600px]">
+          <div className="w-full max-w-[600px]" role="region" aria-label="Chess board">
             {/* Opponent info bar */}
-            <div className="flex items-center justify-between mb-3 px-1">
+            <div className="flex items-center justify-between mb-3 px-1" role="status" aria-label="Opponent info">
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-full bg-gradient-to-br from-red-400 to-red-600 flex items-center justify-center">
                   <FaUser className="text-white text-xs" />
@@ -258,7 +259,7 @@ export default function PlayOnlinePage() {
             </div>
 
             {/* Player info bar */}
-            <div className="flex items-center justify-between mt-3 px-1">
+            <div className="flex items-center justify-between mt-3 px-1" role="status" aria-label="Your info">
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-full bg-gradient-to-br from-teal-400 to-blue-600 flex items-center justify-center">
                   <FaUser className="text-white text-xs" />
@@ -285,7 +286,7 @@ export default function PlayOnlinePage() {
           </div>
 
           {/* Game Sidebar - Move History & Controls */}
-          <div className="w-full lg:w-80 space-y-4">
+          <div className="w-full lg:w-80 space-y-4" role="complementary" aria-label="Game controls">
             {/* Game Status Card */}
             <div className="rounded-xl border border-gray-700/50 bg-gray-800/40 p-4 animate-fade-in">
               <div className="flex items-center justify-between mb-3">
@@ -301,7 +302,7 @@ export default function PlayOnlinePage() {
               </div>
 
               {gameStatus !== "playing" && (
-                <div className="p-3 rounded-lg bg-gradient-to-r from-yellow-500/10 to-orange-500/10 border border-yellow-500/30 mb-3 animate-scale-in">
+                <div className="p-3 rounded-lg bg-gradient-to-r from-yellow-500/10 to-orange-500/10 border border-yellow-500/30 mb-3 animate-scale-in" role="alert" aria-live="assertive">
                   <p className="text-sm font-bold text-yellow-400">
                     {gameStatus === "checkmate" && "Checkmate!"}
                     {gameStatus === "stalemate" && "Stalemate!"}
@@ -312,7 +313,7 @@ export default function PlayOnlinePage() {
               )}
 
               {game.isCheck() && gameStatus === "playing" && (
-                <div className="p-2 rounded-lg bg-red-500/10 border border-red-500/30 mb-3 animate-scale-in">
+                <div className="p-2 rounded-lg bg-red-500/10 border border-red-500/30 mb-3 animate-scale-in" role="alert" aria-live="assertive">
                   <p className="text-sm font-bold text-red-400">Check!</p>
                 </div>
               )}
@@ -323,7 +324,7 @@ export default function PlayOnlinePage() {
             </div>
 
             {/* Move History */}
-            <div className="rounded-xl border border-gray-700/50 bg-gray-800/40 p-4">
+            <div className="rounded-xl border border-gray-700/50 bg-gray-800/40 p-4" role="region" aria-label="Move history">
               <h3 className="text-sm font-semibold text-gray-300 mb-3">
                 Moves
               </h3>
@@ -367,6 +368,7 @@ export default function PlayOnlinePage() {
             <div className="flex gap-2">
               <button
                 onClick={() => {}}
+                aria-label="Flip board orientation"
                 className="flex-1 py-2.5 rounded-xl bg-gray-800/60 hover:bg-gray-700/60 border border-gray-700/50 text-gray-300 text-sm font-medium transition-all duration-300"
               >
                 Flip Board
@@ -374,6 +376,7 @@ export default function PlayOnlinePage() {
               <button
                 onClick={handleResign}
                 disabled={gameStatus !== "playing"}
+                aria-label="Resign game"
                 className="flex-1 py-2.5 rounded-xl bg-red-500/10 hover:bg-red-500/20 border border-red-500/30 text-red-400 text-sm font-medium transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Resign

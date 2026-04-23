@@ -204,6 +204,7 @@ export function WalletConnectModal({
                       <input
                         type="text"
                         placeholder="Destination address"
+                        aria-label="Destination address"
                         value={xlmDestination}
                         onChange={(e) => setXlmDestination(e.target.value)}
                         className="w-full px-3 py-2 rounded-lg bg-gray-800/60 border border-gray-700/50 text-gray-200 text-sm placeholder:text-gray-500 focus:outline-none focus:border-teal-500/50 transition-colors"
@@ -211,6 +212,7 @@ export function WalletConnectModal({
                       <input
                         type="number"
                         placeholder="Amount (XLM)"
+                        aria-label="Amount in XLM"
                         value={xlmAmount}
                         onChange={(e) => setXlmAmount(e.target.value)}
                         step="0.001"

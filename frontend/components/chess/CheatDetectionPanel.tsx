@@ -67,6 +67,8 @@ export function CheatDetectionPanel({
       {/* Header — always visible */}
       <button
         onClick={onToggle}
+        aria-expanded={isExpanded}
+        aria-controls="cheat-detection-details"
         className="w-full flex items-center justify-between p-4 hover:bg-gray-700/20 transition-colors"
       >
         <div className="flex items-center gap-2">
@@ -86,6 +88,7 @@ export function CheatDetectionPanel({
           {isActive && (
             <span
               className={`text-xs font-medium px-2 py-0.5 rounded-full ${oppRisk.bg} ${oppRisk.border} border ${oppRisk.color}`}
+              aria-label={`Risk level: ${oppRisk.label}`}
             >
               {oppRisk.label}
             </span>
@@ -111,7 +114,7 @@ export function CheatDetectionPanel({
 
       {/* Expanded details */}
       {isExpanded && (
-        <div className="px-4 pb-4 space-y-4 animate-slide-up">
+        <div className="px-4 pb-4 space-y-4 animate-slide-up" id="cheat-detection-details" role="region" aria-label="Fair play analysis details">
           {!isActive ? (
             <p className="text-xs text-gray-500 italic">
               Collecting moves for analysis... (minimum 6 moves needed)
@@ -151,7 +154,13 @@ function OpponentSection({ analysis }: { analysis: HeuristicResult }) {
           <span className="text-gray-400">Suspicion Score</span>
           <span className={`font-bold ${cfg.color}`}>{analysis.score}/100</span>
         </div>
-        <div className="w-full h-2 rounded-full bg-gray-700/50 overflow-hidden">
+        <div className="w-full h-2 rounded-full bg-gray-700/50 overflow-hidden"
+          role="progressbar"
+          aria-valuenow={analysis.score}
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-label={`Suspicion score: ${analysis.score} out of 100`}
+        >
           <div
             className={`h-full rounded-full transition-all duration-500 ${
               analysis.score >= 70
@@ -235,7 +244,13 @@ function HeuristicBreakdown({ details }: { details: HeuristicDetails }) {
               {item.value}%
             </span>
           </div>
-          <div className="w-full h-1 rounded-full bg-gray-700/40">
+          <div className="w-full h-1 rounded-full bg-gray-700/40"
+            role="progressbar"
+            aria-valuenow={item.value}
+            aria-valuemin={0}
+            aria-valuemax={100}
+            aria-label={`${item.label}: ${item.value} percent`}
+          >
             <div
               className={`h-full rounded-full transition-all duration-300 ${
                 item.value >= 50
